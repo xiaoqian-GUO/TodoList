@@ -1,4 +1,7 @@
-class TextInput extends React.Component{
+import React, { Component } from "react";
+import "./css/todolist.css";
+
+class TextInput extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -17,13 +20,13 @@ class TextInput extends React.Component{
         });
     }
     getKey=(e)=>{
-        if(e.keyCode==13){
+        if(e.keyCode === 13){
             var tmp=this.state.arr;
             var tmp2=this.state.arrStatus;
             var tmp3=this.state.checkStatus;
             var tmp4=this.state.textStatus;
             var str=e.target.value;
-            if(str!="" && tmp.indexOf(str)==-1){
+            if(str !== "" && tmp.indexOf(str) ===-1){
                 tmp.push(e.target.value);
                 tmp2.push("floatSpanNone");
                 tmp3.push("checkboxStyle");
@@ -39,16 +42,14 @@ class TextInput extends React.Component{
         }
     }
     deleteText=(e)=>{
-        //删除text
         var parent=e.target.parentNode;
         var first=parent.firstChild;
         var lastCld=parent.lastChild;
         var str=lastCld.previousSibling.innerHTML;
         var index=this.state.arr.indexOf(str);
         var tmp=this.state.arrStatus;
-        var tmp2=this.state.checkStatus;
         var tmp3=this.state.textStatus;
-        if(index!=-1){
+        if(index!==-1){
             if(first.checked){
                 tmp[index]="floatSpan";
                 tmp3[index]="divItem deleteStyle";
@@ -69,14 +70,12 @@ class TextInput extends React.Component{
         }
     }
     deleteFromArr=(e)=>{
-        var first=e.target.parentNode.firstChild;
         var tgt=e.target.previousSibling;
         var str=tgt.innerHTML;
         var tmp=this.state.arr;
         var tmp4=this.state.textStatus;
         var index=tmp.indexOf(str);
-        var len=tmp.length;
-        if(index!=-1){
+        if(index!==-1){
             tmp4[index]="checkboxStyleNone";
         }
         this.setState({
@@ -89,9 +88,7 @@ class TextInput extends React.Component{
     }
     render(){
         var tmp=this.state.arr;
-        var tmp2=this.state.arrStatus;
         var tmp3=this.state.textStatus;
-        var tmp4=this.state.checkStatus;
         tmp=tmp.map((item,index)=>{
             return (
                 <div className={tmp3[index]} key={index}>
@@ -125,13 +122,13 @@ class TextInput extends React.Component{
             paddingLeft:10
         };
         var flexDiv={
-            marginLeft:6,
+            marginLeft:7,
             display:"flex",
             justifyContent:"center",
             alignItems:"center"
         };
         var otherStyle={
-            width:314,
+            width:312,
             minHeight:0,
             background:"#dcdcdc"
         };
@@ -156,8 +153,4 @@ class TextInput extends React.Component{
     }
 }
 
-const example=<TextInput></TextInput>
-ReactDOM.render(
-    example,
-    document.querySelector("#example")
-);
+export default TextInput;
